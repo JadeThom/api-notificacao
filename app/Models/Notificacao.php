@@ -16,7 +16,7 @@ class Notificacao extends Model
         'mensagem',
         'canal',
         'status',
-        'lida_em',
+        'enviado_em',
     ];
 
 
