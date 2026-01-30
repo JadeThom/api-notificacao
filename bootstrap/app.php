@@ -13,8 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
-            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':60,1',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'throttle:api',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
