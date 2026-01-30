@@ -98,6 +98,19 @@ return [
             'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
+        'external_pgsql' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_EXTERNAL_HOST', '127.0.0.1'),
+            'port' => env('DB_EXTERNAL_PORT', '5432'),
+            'database' => env('DB_EXTERNAL_DATABASE'),
+            'username' => env('DB_EXTERNAL_USERNAME'),
+            'password' => env('DB_EXTERNAL_PASSWORD'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
