@@ -1,59 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📬 API de Notificações — Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API REST desenvolvida em **Laravel** com foco em **boas práticas, arquitetura limpa e simulação de cenários reais**, como consumo de dados externos e extração de informações de banco externo.
 
-## About Laravel
+Este projeto foi criado com objetivo **exclusivo de portfólio**, demonstrando domínio em desenvolvimento backend com Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Objetivo do Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Fornecer uma API responsável por:
 
-## Learning Laravel
+- Gerenciar notificações (e-mail, SMS e push)
+- Controlar status de envio
+- Registrar logs de envio
+- Simular consumo de dados externos
+- Simular extração de dados de banco externo
+- Aplicar rate limit em rotas sensíveis
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Tudo isso utilizando **boas práticas de arquitetura**, separação de responsabilidades e código limpo.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### Principais conceitos aplicados:
+- Service Layer
+- Enums para domínio
+- Controllers enxutos
+- Responsabilidade única
+- Código desacoplado
+- API stateless
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🚀 Funcionalidades
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 📌 Notificações
+- Criar notificação
+- Listar notificações
+- Visualizar notificação
+- Atualizar notificação
+- Remover notificação
+- Enviar notificação por canal
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🧪 Simulação de Integrações Externas
 
-## Code of Conduct
+### 🔹 Consumo de API externa
+Simulação de consumo via `Http::fake()` para cenários como:
+- APIs de terceiros
+- Serviços governamentais
+- Sistemas legados
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🔹 Banco de dados externo
+Simulação de conexão externa usando:
+- Conexões múltiplas no `database.php`
+- Services responsáveis pela extração de dados
 
-## Security Vulnerabilities
+Isso demonstra preparo para ambientes corporativos reais.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## ⏱ Rate Limiting
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+O projeto utiliza **Rate Limiter** nativo do Laravel.
+
+### Limites configurados:
+- API geral: **60 requisições por minuto**
+- Envio de notificações: **10 envios por minuto por IP**
+
+Proteção contra abuso e sobrecarga da API.
+
+---
+
+## 🛣 Rotas da API
+
+Prefixo padrão:
+
+
+### Notificações
+| Método | Rota                              | Descrição                 |
+|------|-----------------------------------|---------------------------|
+| GET  | /api/notificacoes                 | Listar notificações       |
+| POST | /api/notificacoes                 | Criar notificação         |
+| GET  | /api/notificacoes/{id}            | Visualizar notificação    |
+| PUT  | /api/notificacoes/{id}            | Atualizar notificação     |
+| DELETE | /api/notificacoes/{id}          | Remover notificação       |
+| POST | /api/notificacoes/{id}/enviar     | Enviar notificação        |
+
+---
+
+## 📦 Exemplo de Payload (POST)
+
+```json
+{
+  "titulo": "Nova mensagem",
+  "mensagem": "Você recebeu uma nova mensagem",
+  "canal": "email",
+  "status": "pendente"
+}
+
+# Clonar o repositório
+git clone https://github.com/seu-usuario/api-notificacoes.git
+
+# Entrar no projeto
+cd api-notificacoes
+
+# Instalar dependências
+composer install
+
+# Criar arquivo .env
+cp .env.example .env
+
+# Gerar chave
+php artisan key:generate
+
+# Rodar migrations
+php artisan migrate
+
+# Subir servidor
+php artisan serve
